@@ -33,13 +33,33 @@ $(function () {
         ref.child(key).update(todo);
     }
 
+    // Initialize the FirebaseUI Widget using Firebase.
+    const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+    const uiConfig = {
+        callbacks: {
+            signInSuccessWithAuthResult: (authResult, redirectUrl) => true,
+            uiShown: () => document.getElementById('loader').style.display = 'none'
+        },
+        signInFlow: 'popup',
+        signInSuccessUrl: './chat.html',
+        signInOptions: [
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        tosUrl: '#'
+    };
+
+    // The start method will wait until the DOM is loaded.
+    
 
     function AppViewModel() {
         const self = this;
 
+        self.email = ko.observable('');
+        self.password = ko.observable('');
         self.message = ko.observable('');
         self.isLoading = ko.observable(false);
-
+        self.toLogin = ko.observable(false);
         self.messages = ko.observableArray([]);
 
         ref.on('value', async snapshot => {
@@ -59,6 +79,27 @@ $(function () {
                 addToFirebase(m);
                 self.message('');
             }
+        }
+
+        self.register = () => {
+            const email = self.email().trim();
+            const password = self.password().trim();
+            if (email && password) {
+                firebase.auth().createUserWithEmailAndPassword(email, password).then(u => {
+                    console.log(u.user.uid);
+                    self.email('').password('');
+                }).catch(error => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorCode, errorMessage);
+                });
+            }
+        }
+
+        self.toLoginForm = () => {
+            const t = !self.toLogin();
+            self.toLogin(t);
+            ui.start('#firebaseui-auth-container', uiConfig);
         }
 
         /*  self.toggle = todo => {

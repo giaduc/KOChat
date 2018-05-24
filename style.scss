@@ -4,6 +4,73 @@ body {
     font-family: 'Oxygen', sans-serif;
 }
 
+.register {
+    display: flex;
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+    .wrap {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 300px;
+        padding: 30px;
+        border: tomato solid 1px;
+        border-radius: 3px;
+        box-shadow: 5px 5px 0 tomato;
+        h2 {
+            font-weight: 500;
+        }
+        input,
+        button,
+        h2,
+        a {
+            color: tomato;
+        }
+        input,
+        button {
+            border-radius: 3px;
+            padding: 10px;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
+        input {
+            margin-top: 10px;
+            border: tomato solid 1px;
+            box-shadow: 3px 3px 0 tomato;
+            &::-webkit-input-placeholder {
+                color: tomato;
+                opacity: .7;
+            }
+        }
+        .control {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+        }
+        button {
+            cursor: pointer;
+            padding-left: 20px;
+            padding-right: 20px;
+            border: tomato solid 1px;
+            background: #fff;
+            box-shadow: 3px 3px 0 tomato;
+            &:hover {
+                opacity: .9;
+                color: #fff;
+                background-color: tomato;
+                box-shadow: 0 0;
+            }
+        }
+        a {
+            margin-top: 20px;
+            text-decoration: none;
+        }
+    }
+}
+
 .chat {
     display: flex;
     flex-direction: column;
