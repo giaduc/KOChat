@@ -16,20 +16,37 @@
 
 <body>
 
-    <div class="login" data-bind="if: toLogin">
-        <h1>Welcome to My Awesome App</h1>
-        <div id="firebaseui-auth-container"></div>
-        <div id="loader">Loading...</div>
+    <div data-bind="if: toLogin">
+        <div class="login">
+            <h1>Welcome to My Awesome App</h1>
+            <div id="firebaseui-auth-container"></div>
+            <div id="loader">Loading...</div>
+        </div>
     </div>
-    
-    <div class="register" data-bind="if: !toLogin()">
-        <div class="wrap">
-            <h2>Register Tomato account</h2>
-            <input type="text" data-bind="value: email" placeholder="Email...">
-            <input type="password" data-bind="value: password" placeholder="Password...">
-            <div class="control">
-                <button data-bind="click: register">Register</button>
-                <button data-bind="click: toLoginForm">Login</button>
+
+    <div data-bind="if: !toLogin()">
+        <div class="register">
+            <div class="wrap">
+                <h2>Register Tomato account</h2>
+                <input type="text" data-bind="value: email" placeholder="Email...">
+                <input type="password" data-bind="value: password" placeholder="Password...">
+                <div class="control">
+                    <button data-bind="click: register">Register</button>
+                    <button data-bind="click: toLoginForm">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div data-bind="if: isLoggedIn">
+        <div class="chat">
+            <div class="message-display">
+                <div class="wrap" data-bind="foreach: messages">
+                    <p data-bind="text: $data.text"></p>
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" data-bind="value: message, valueUpdate: 'afterkeydown', enterKey: add" placeholder="Type here...">
             </div>
         </div>
     </div>
@@ -40,7 +57,6 @@
     <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
 
     <script src="index.js"></script>
-    <script src="firebaseSign.js"></script>
 </body>
 
 </html>

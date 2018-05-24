@@ -42,7 +42,7 @@ $(function () {
             uiShown: () => document.getElementById('loader').style.display = 'none'
         },
         signInFlow: 'popup',
-        signInSuccessUrl: './chat.html',
+        signInSuccessUrl: '#',
         signInOptions: [
             firebase.auth.EmailAuthProvider.PROVIDER_ID
         ],
@@ -59,6 +59,7 @@ $(function () {
         self.password = ko.observable('');
         self.message = ko.observable('');
         self.isLoading = ko.observable(false);
+        self.isLoggedIn = ko.observable(false);
         self.toLogin = ko.observable(false);
         self.messages = ko.observableArray([]);
 
@@ -87,6 +88,7 @@ $(function () {
             if (email && password) {
                 firebase.auth().createUserWithEmailAndPassword(email, password).then(u => {
                     console.log(u.user.uid);
+                    self.isLoggedIn(true);
                     self.email('').password('');
                 }).catch(error => {
                     const errorCode = error.code;
