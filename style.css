@@ -1,0 +1,10 @@
+body { width: 900px; margin: 0 auto; font-family: 'Oxygen', sans-serif; }
+
+.chat { display: flex; flex-direction: column; align-items: center; padding-top: 50px; }
+.chat .message-display { box-sizing: border-box; border-top-left-radius: 10px; border-top-right-radius: 10px; background-color: tomato; height: 500px; width: 300px; display: flex; flex-direction: column; justify-content: flex-end; padding: 15px; overflow: auto; }
+.chat .message-display::-webkit-scrollbar { display: none; }
+.chat .message-display p { margin: 0; margin-bottom: 10px; color: #fff; word-wrap: break-word; background-color: darksalmon; padding: 5px 10px; border-radius: 5px; }
+.chat .message-input { display: flex; box-sizing: border-box; background-color: aquamarine; width: 300px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; overflow: hidden; }
+.chat .message-input input { padding: 15px; width: 100%; border: tomato solid 1px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; }
+
+/*# sourceMappingURL=style.css.map */
